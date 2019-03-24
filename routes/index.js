@@ -1,9 +1,9 @@
 // ./routes/index.js
-const users = require('./user');
-const photos = require('./photos');
+const tasks = require('./tasks');
+// const photos = require('./photos');
 
 module.exports = app => {
-  app.use('/users', users);
-  app.use('/photos', photos);
+  app.use('/tasks', tasks);
+  // app.use('/photos', photos);
   // etc..
 };

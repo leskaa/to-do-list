@@ -13,7 +13,7 @@ app.use(
   })
 );
 
-app.get('/', (request, response) => {
+app.get('/', (req, res) => {
   response.json({ info: 'to-do-list API' });
 });
 
