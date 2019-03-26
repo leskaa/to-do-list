@@ -1,9 +1,9 @@
 // ./app.js
 const express = require('express');
 const mountRoutes = require('./routes');
+const bodyParser = require('body-parser');
 
 const app = express();
-mountRoutes(app);
 
 // ... more express setup stuff can follow
 app.use(bodyParser.json());
@@ -13,9 +13,14 @@ app.use(
   })
 );
 
+mountRoutes(app);
+
 app.get('/', (req, res) => {
-  response.json({ info: 'to-do-list API' });
+  res.json({ info: 'to-do-list API' });
 });
+
+const port = process.env.PORT || 3000;
+// const host = 'localhost';
 
 app.listen(port, () => {
   console.log(`App running on port: ${port}.`);
