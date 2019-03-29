@@ -15,7 +15,7 @@ app.use(
 
 mountRoutes(app);
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.json({ info: 'to-do-list API' });
 });
 

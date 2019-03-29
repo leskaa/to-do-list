@@ -56,7 +56,7 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { task } = req.body;
     await db.query('UPDATE tasks SET task = $1 WHERE id = $2', [task, id]);
-    res.status(200).send(`Task motified with ID: ${id}`);
+    res.status(200).send(`Task modified with ID: ${id}`);
   } catch (err) {
     res.status(400).send(err);
   }
