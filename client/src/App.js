@@ -1,46 +1,66 @@
 import React, { Component } from 'react';
+import TodoItems from './TodoItems';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      term: '',
       items: []
     };
+
+    this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
-  onChange = event => {
-    this.setState({ term: event.target.value });
-  };
+  addItem(e) {
+    if (this._inputElement.value !== '') {
+      var newItem = {
+        text: this._inputElement.value,
+        key: Date.now()
+      };
 
-  onSubmit = event => {
-    event.preventDefault();
-    this.setState({
-      term: '',
-      items: [...this.state.items, this.state.term]
+      this.setState(prevState => {
+        return {
+          items: prevState.items.concat(newItem)
+        };
+      });
+
+      this._inputElement.value = '';
+    }
+
+    console.log(this.state.items);
+
+    e.preventDefault();
+  }
+
+  deleteItem(key) {
+    var filteredItems = this.state.items.filter(function(item) {
+      return item.key !== key;
     });
-  };
+
+    this.setState({
+      items: filteredItems
+    });
+  }
 
   render() {
     return (
-      <div>
-        <form className="App" onSubmit={this.onSubmit}>
-          <input value={this.state.term} onChange={this.onChange} />
-          <button>Submit</button>
-        </form>
-        <List items={this.state.items} />
+      <div className="todoListMain">
+        <div className="header">
+          <form onSubmit={this.addItem}>
+            <input
+              ref={a => (this._inputElement = a)}
+              placeholder="enter task"
+            />
+            <button type="submit">add</button>
+          </form>
+        </div>
+        <TodoItems entries={this.state.items} delete={this.deleteItem} />
       </div>
     );
   }
 }
-
-const List = props => (
-  <ul>
-    {props.items.map((item, index) => (
-      <li key={index}>{item}</li>
-    ))}
-  </ul>
-);
 
 export default App;
