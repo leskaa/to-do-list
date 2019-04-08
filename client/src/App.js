@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import TodoItems from './TodoItems';
-import './App.css';
+import React, { Component } from "react";
+import TodoItems from "./TodoItems";
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   addItem(e) {
-    if (this._inputElement.value !== '') {
+    if (this._inputElement.value !== "") {
       var newItem = {
         text: this._inputElement.value,
         key: Date.now()
@@ -27,7 +27,7 @@ class App extends Component {
         };
       });
 
-      this._inputElement.value = '';
+      this._inputElement.value = "";
     }
 
     console.log(this.state.items);
