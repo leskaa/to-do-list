@@ -1,9 +1,14 @@
 // ./app.js
-const express = require('express');
-const mountRoutes = require('./routes');
-const bodyParser = require('body-parser');
+const express = require("express");
+const mountRoutes = require("./routes");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
+
+const corsOptions = {
+  origin: "*"
+};
 
 // ... more express setup stuff can follow
 app.use(bodyParser.json());
@@ -13,10 +18,12 @@ app.use(
   })
 );
 
+app.use(cors(corsOptions));
+
 mountRoutes(app);
 
-app.get('/api', (req, res) => {
-  res.json({ info: 'to-do-list API' });
+app.get("/api", (req, res) => {
+  res.json({ info: "to-do-list API" });
 });
 
 const port = process.env.PORT || 3000;

@@ -14,6 +14,33 @@ class App extends Component {
     this.deleteItem = this.deleteItem.bind(this);
   }
 
+  componentDidMount() {
+    fetch("http://localhost:3000/api/tasks")
+      .then(res => res.json())
+      .then(
+        result => {
+          let itemList = [];
+          result.forEach(item => {
+            let newItem = {
+              text: item.task,
+              key: item.id
+            };
+            itemList.push(newItem);
+          });
+          this.setState({
+            items: itemList
+          });
+        },
+        error => {
+          this.setState({
+            error
+          });
+        }
+      );
+  }
+
+  componentWillUnmount() {}
+
   addItem(e) {
     if (this._inputElement.value !== "") {
       var newItem = {
