@@ -19,13 +19,12 @@ class App extends Component {
       .then(res => res.json())
       .then(
         result => {
-          let itemList = [];
-          result.forEach(item => {
-            let newItem = {
+          let itemList = result.map(item => {
+            item = {
               text: item.task,
               key: item.id
             };
-            itemList.push(newItem);
+            return item;
           });
           this.setState({
             items: itemList
@@ -42,27 +41,39 @@ class App extends Component {
   componentWillUnmount() {}
 
   addItem(e) {
-    if (this._inputElement.value !== "") {
-      var newItem = {
-        text: this._inputElement.value,
-        key: Date.now()
-      };
-
-      this.setState(prevState => {
-        return {
-          items: prevState.items.concat(newItem)
-        };
-      });
-
+    let value = this._inputElement.value;
+    if (value !== "") {
+      fetch("http://localhost:3000/api/tasks", {
+        method: "post",
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        body: `task=${value}`
+      })
+        .then(res => res.json())
+        .then(result => {
+          let newItem = {
+            text: value,
+            key: result.id
+          };
+          this.setState(prevState => {
+            return {
+              items: prevState.items.concat(newItem)
+            };
+          });
+        });
       this._inputElement.value = "";
     }
-
     console.log(this.state.items);
 
     e.preventDefault();
   }
 
   deleteItem(key) {
+    fetch(`http://localhost:3000/api/tasks/${key}`, {
+      method: "delete"
+    });
+
     var filteredItems = this.state.items.filter(function(item) {
       return item.key !== key;
     });
