@@ -1,7 +1,13 @@
+h1 {
+  padding-bottom: 10px;
+  font-family: "Fira Code";
+  font-weight: 600;
+  color: #fff;
+}
 body {
   padding: 50px;
-  background-color: #66ccff;
-  font-family: sans-serif;
+  background-color: #d7af70;
+  font-family: "Fira Code";
 }
 #container {
   display: flex;

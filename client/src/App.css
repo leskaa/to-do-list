@@ -1,21 +1,23 @@
 .todoListMain .header input {
   padding: 10px;
   font-size: 16px;
+  font-family: "Fira Code";
   border: 2px solid #fff;
   width: 165px;
 }
 .todoListMain .header button {
   padding: 10px;
   font-size: 16px;
+  font-family: "Fira Code";
   margin: 10px;
   margin-right: 0px;
-  background-color: #0066ff;
+  background-color: #e76b74;
   color: #fff;
-  border: 2px solid #0066ff;
+  border: 2px solid #e76b74;
 }
 .todoListMain .header button:hover {
-  background-color: #003399;
-  border: 2px solid #003399;
+  background-color: #ea526f;
+  border: 2px solid #ea526f;
   cursor: pointer;
 }
 .todoListMain .theList {
@@ -24,8 +26,8 @@
   width: 250px;
 }
 .todoListMain .theList li {
-  color: #333;
-  background-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  background-color: #e97880;
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 5px;
@@ -33,7 +35,7 @@
   transition: background-color 0.2s ease-out;
 }
 .todoListMain .theList li:hover {
-  background-color: pink;
+  background-color: #e76b74;
   cursor: pointer;
 }
 ul.theList {
