@@ -22,12 +22,16 @@ app.use(cors(corsOptions));
 
 mountRoutes(app);
 
+app.use(express.static("../client/build"));
+
 app.get("/api", (req, res) => {
   res.json({ info: "to-do-list API" });
 });
 
-const port = process.env.PORT || 3000;
-// const host = 'localhost';
+const port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
 
 app.listen(port, () => {
   console.log(`App running on port: ${port}.`);
