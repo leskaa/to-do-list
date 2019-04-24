@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import TodoItems from "./TodoItems";
-import "./App.css";
+import React, { Component } from 'react';
+import TodoItems from './TodoItems';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      items: []
+      items: [],
     };
 
     this.addItem = this.addItem.bind(this);
@@ -15,24 +15,24 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/tasks")
+    fetch('http://localhost:3000/api/tasks')
       .then(res => res.json())
       .then(
         result => {
           let itemList = result.map(item => {
             item = {
               text: item.task,
-              key: item.id
+              key: item.id,
             };
             return item;
           });
           this.setState({
-            items: itemList
+            items: itemList,
           });
         },
         error => {
           this.setState({
-            error
+            error,
           });
         }
       );
@@ -42,27 +42,27 @@ class App extends Component {
 
   addItem(e) {
     let value = this._inputElement.value;
-    if (value !== "") {
-      fetch("http://localhost:3000/api/tasks", {
-        method: "post",
+    if (value !== '') {
+      fetch('http://localhost:3000/api/tasks', {
+        method: 'post',
         headers: {
-          "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
         },
-        body: `task=${value}`
+        body: `task=${value}`,
       })
         .then(res => res.json())
         .then(result => {
           let newItem = {
             text: value,
-            key: result.id
+            key: result.id,
           };
           this.setState(prevState => {
             return {
-              items: prevState.items.concat(newItem)
+              items: prevState.items.concat(newItem),
             };
           });
         });
-      this._inputElement.value = "";
+      this._inputElement.value = '';
     }
     console.log(this.state.items);
 
@@ -71,7 +71,7 @@ class App extends Component {
 
   deleteItem(key) {
     fetch(`http://localhost:3000/api/tasks/${key}`, {
-      method: "delete"
+      method: 'delete',
     });
 
     var filteredItems = this.state.items.filter(function(item) {
@@ -79,7 +79,7 @@ class App extends Component {
     });
 
     this.setState({
-      items: filteredItems
+      items: filteredItems,
     });
   }
 
